@@ -20,7 +20,7 @@ public class SpendAnalysysServiceImpl implements SpendAnalsysServcice {
 		List<SpendAnalysysResponseDto> analysysList = null;
 
 		if (currentWeek.equalsIgnoreCase("daily")) {
-			analysysList = orderRepository.getDailyAnalysys(LocalDate.now().minusDays(1));
+			analysysList = orderRepository.getDailyAnalysys(LocalDate.now());
 		}
 
 		else if (currentWeek.equalsIgnoreCase("week")) {
