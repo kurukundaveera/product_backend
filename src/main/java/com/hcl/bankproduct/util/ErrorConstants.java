@@ -11,4 +11,6 @@ public class ErrorConstants {
 	public static final String CUSTOMER_NOT_FOUND = "Customer Not Found";
 	public static final String INSUFFICIENT_QUANTITY_EXCEPTION = "Please enter the quantity within the range of 500";
 	public static final String ORDER_NOT_FOUND = "Order Not Found";
+	public static final String ERROR_PRODUCTS_NOT_FOUND = "Product not found";
+
 }
