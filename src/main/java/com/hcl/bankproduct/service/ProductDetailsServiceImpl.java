@@ -45,7 +45,7 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 		List<ProductDetailsResponseDto> response = new ArrayList<>();
 		List<Product> products = productRepository.findByProductId(productId);
 		if(products.isEmpty())
-			throw new ProductsNotFoundException(ErrorConstants.ERROR_PRODUCT_NOT_FOUND);
+			throw new ProductsNotFoundException(ErrorConstants.ERROR_PRODUCTS_NOT_FOUND);
 		products.stream().forEach(p->
 		{
 			ProductDetailsResponseDto productDetails = new ProductDetailsResponseDto();
