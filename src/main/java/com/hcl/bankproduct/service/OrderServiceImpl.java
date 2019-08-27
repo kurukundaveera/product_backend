@@ -1,6 +1,8 @@
 package com.hcl.bankproduct.service;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import com.hcl.bankproduct.dto.OrderResponseDto;
 import com.hcl.bankproduct.entity.Customer;
 import com.hcl.bankproduct.entity.Orders;
 import com.hcl.bankproduct.entity.Product;
+import com.hcl.bankproduct.exception.CommonException;
 import com.hcl.bankproduct.exception.CustomerNotFoundException;
 import com.hcl.bankproduct.exception.InformationNotFoundException;
 import com.hcl.bankproduct.exception.InsufficientQuantityException;
@@ -49,6 +52,18 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public OrderResponseDto createOrder(OrderRequestDto orderRequestDto) {
 		logger.info("creating order in service {} : ", orderRequestDto.getProductId());
+		
+		if (!validateCustomerName(orderRequestDto.getCustomerName())) {
+			throw new CommonException(ErrorConstants.INVALID_NAME);
+		}
+		
+		if (!validMobileNumber(orderRequestDto.getMobileNumber())) {
+			throw new CommonException(ErrorConstants.INVALID_MOBILENUMBER);
+		}
+
+		if (!validEmailId(orderRequestDto.getEmailId())) {
+			throw new CommonException(ErrorConstants.INVALID_EMAILID);
+		}
 		OrderResponseDto response = new OrderResponseDto();
 		if (orderRequestDto.getProductId() == null) {
 			throw new InformationNotFoundException(ErrorConstants.DETAILS_NOT_FOUND);
@@ -81,6 +96,23 @@ public class OrderServiceImpl implements OrderService {
 			logger.info("order success for the id {} : ", responseOrder.getOrderId());
 		}
 		return response;
+	}
+
+	private boolean validMobileNumber(String number) {
+		Pattern p = Pattern.compile("^[0-9]{10}$");
+		Matcher m = p.matcher(number);
+		return (m.find() && m.group().equals(number));
+	}
+
+	private boolean validEmailId(String email) {
+		Pattern p = Pattern.compile("^(.+)@(.+)$", Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(email);
+		return (m.find() && m.group().equals(email));
+	}
+
+	private boolean validateCustomerName(String customerName) {
+		String name = ("^[a-zA-Z]*$");
+		return customerName.matches(name);
 	}
 
 }
