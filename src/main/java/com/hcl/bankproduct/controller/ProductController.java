@@ -40,7 +40,7 @@ public class ProductController {
 		return new ResponseEntity<>(productService.importDataIntoDB(reapExcelDataFile), HttpStatus.OK);
 	}
 
-	@GetMapping("/getProducts")
+	@GetMapping("/products")
 	public ResponseEntity<List<ProductResponseDto>> getProducts() {
 		logger.info("inside the getProducts method in ProductController");
 		List<ProductResponseDto> response = productService.getAllProducts();
