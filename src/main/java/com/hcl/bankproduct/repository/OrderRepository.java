@@ -36,7 +36,4 @@ public interface OrderRepository extends JpaRepository<Orders, Integer> {
 			" o.productId=p.productId group by o.productId")
 	List<SpendAnalysysResponseDto> getAnalysys(@Param("startDate") LocalDate startDate,@Param("endDate") LocalDate endDate);
 	
-	
-//	List<SpendAnalysysResponseDto> findByOrderDateGreaterThanAndOrderDateLessThan(@Param("startDate") LocalDate startDate,@Param("endDate") LocalDate endDate);
-
 }
