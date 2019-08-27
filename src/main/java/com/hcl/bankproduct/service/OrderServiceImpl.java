@@ -24,6 +24,7 @@ import com.hcl.bankproduct.repository.CustomerRepository;
 import com.hcl.bankproduct.repository.OrderRepository;
 import com.hcl.bankproduct.repository.ProductRepository;
 import com.hcl.bankproduct.util.ErrorConstants;
+import com.hcl.bankproduct.util.SmsSender;
 
 /**
  * @author DeepikaSivarajan
@@ -40,6 +41,8 @@ public class OrderServiceImpl implements OrderService {
 	OrderRepository orderRepository;
 	@Autowired
 	CustomerRepository customerRepository;
+	@Autowired
+	SmsSender smsSender;
 
 	/**
 	 * This method is intended to buy a product
@@ -52,11 +55,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public OrderResponseDto createOrder(OrderRequestDto orderRequestDto) {
 		logger.info("creating order in service {} : ", orderRequestDto.getProductId());
-		
+
 		if (!validateCustomerName(orderRequestDto.getCustomerName())) {
 			throw new CommonException(ErrorConstants.INVALID_NAME);
 		}
-		
+
 		if (!validMobileNumber(orderRequestDto.getMobileNumber())) {
 			throw new CommonException(ErrorConstants.INVALID_MOBILENUMBER);
 		}
@@ -94,6 +97,7 @@ public class OrderServiceImpl implements OrderService {
 			response.setOrderId(responseOrder.getOrderId());
 			response.setMessage("Order Placed Successfully");
 			logger.info("order success for the id {} : ", responseOrder.getOrderId());
+			smsSender.sendSms(customerResponse.getMobileNumber());
 		}
 		return response;
 	}
