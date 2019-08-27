@@ -58,7 +58,7 @@ public class SpendAnalysysServiceImplTest {
 	public void testGetAnalysys()
 	{
 		String currentWeek = "daily";
-		Mockito.when(orderRepository.getDailyAnalysys(LocalDate.now())).thenReturn(listSpendAnalysysResponseDto);
+		Mockito.when(orderRepository.getDailyAnalysys(LocalDate.now().minusDays(1))).thenReturn(listSpendAnalysysResponseDto);
 		List<SpendAnalysysResponseDto> analysysList = spendAnalysysServiceImpl.getAnalysys(currentWeek);
 		assertEquals(listSpendAnalysysResponseDto.get(0).getProductName(), analysysList.get(0).getProductName());
 	}

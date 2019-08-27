@@ -30,7 +30,7 @@ public class ProductControllerTest {
 	@Test
 	public void getProductsTest() throws Exception {
 		logger.info("inside the getProductsTest method");
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/getProducts").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/products").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 	public static String asJsonString(final Object obj) {
