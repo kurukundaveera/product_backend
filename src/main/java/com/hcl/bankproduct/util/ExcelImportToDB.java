@@ -80,6 +80,7 @@ public class ExcelImportToDB {
 			logger.error(this.getClass().getName() + " loadDataToDB : " + e.getMessage());
 		} finally {
 			try {
+				
 				if(workbook!=null) {
 					workbook.close();
 				}
