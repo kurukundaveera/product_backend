@@ -13,4 +13,41 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()),
 				HttpStatus.NOT_FOUND);
 	}
+
+	@ExceptionHandler(InformationNotFoundException.class)
+	public ResponseEntity<ErrorResponse> informationNotFoundException(Exception e) {
+		return new ResponseEntity<>(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()),
+				HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(ProductNotFoundException.class)
+	public ResponseEntity<ErrorResponse> productNotFoundException(Exception e) {
+		return new ResponseEntity<>(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()),
+				HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(CustomerNotFoundException.class)
+	public ResponseEntity<ErrorResponse> customerNotFoundException(Exception e) {
+		return new ResponseEntity<>(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()),
+				HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(InsufficientQuantityException.class)
+	public ResponseEntity<ErrorResponse> insufficientQuantityException(Exception e) {
+		return new ResponseEntity<>(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()),
+				HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(OrderNotFoundException.class)
+	public ResponseEntity<ErrorResponse> orderNotFoundException(Exception e) {
+		return new ResponseEntity<>(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()),
+				HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(CommonException.class)
+	public ResponseEntity<ErrorResponse> commonException(Exception e) {
+		return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()),
+				HttpStatus.BAD_REQUEST);
+	}
+
 }
