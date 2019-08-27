@@ -8,9 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.hcl.bankproduct.dto.ProductResponseDto;
 import com.hcl.bankproduct.entity.Product;
-import com.hcl.bankproduct.exception.ProductNotFoundException;
+import com.hcl.bankproduct.exception.ProductsNotFoundException;
 import com.hcl.bankproduct.repository.ProductRepository;
 import com.hcl.bankproduct.util.ErrorConstants;
 @Service
@@ -25,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
 		List<ProductResponseDto> responseList = new ArrayList<>();
 		List<Product> productList = productRepository.findAll();
 		if (productList.isEmpty())
-			throw new ProductNotFoundException(ErrorConstants.ERROR_PRODUCTS_NOT_FOUND);
+			throw new ProductsNotFoundException(ErrorConstants.ERROR_PRODUCTS_NOT_FOUND);
 		    productList.stream().forEach(c -> {
 			ProductResponseDto response = new ProductResponseDto();
 			BeanUtils.copyProperties(c, response);

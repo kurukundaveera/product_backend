@@ -2,6 +2,7 @@ package com.hcl.bankproduct.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +13,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.hcl.bankproduct.dto.ProductResponseDto;
 import com.hcl.bankproduct.entity.Product;
-import com.hcl.bankproduct.exception.ProductNotFoundException;
+import com.hcl.bankproduct.exception.ProductsNotFoundException;
 import com.hcl.bankproduct.repository.ProductRepository;
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceTest {
@@ -44,7 +46,7 @@ public class ProductServiceTest {
 		Assert.assertEquals(product.getProductName(), response.get(0).getProductName());
 	}
 	
-	@Test(expected = ProductNotFoundException.class)
+	@Test(expected = ProductsNotFoundException.class)
 	public void getAllProductsTest_1() {
 		logger.info("inside the getAllProductsTest method");
 		 productService.getAllProducts();	
