@@ -27,6 +27,5 @@ public class Product implements Serializable {
 	private Double productNav;
 	private Integer rating;
 	private Integer brokerage;
-	private Double sixMonths;
-	private Double oneYear;
+
 }
