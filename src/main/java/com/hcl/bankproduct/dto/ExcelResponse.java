@@ -11,7 +11,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class ExcelResponse implements Serializable {
+	
 
 	private static final long serialVersionUID = 1L;
 	
