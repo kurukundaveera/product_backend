@@ -1,7 +1,12 @@
 package com.hcl.bankproduct.service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.WeekFields;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,15 +29,17 @@ public class SpendAnalysysServiceImpl implements SpendAnalsysServcice {
 		}
 
 		else if (currentWeek.equalsIgnoreCase("week")) {
+			final ZoneId zt = ZoneId.of("Pacific/Auckland");
+			final DayOfWeek firstDayOfWeek = WeekFields.of(Locale.US).getFirstDayOfWeek();
+
+			LocalDate firstDayInWeek = LocalDate.now(zt).with(TemporalAdjusters.previousOrSame(firstDayOfWeek));
 			LocalDate currentDate = LocalDate.now();
-			LocalDate weekDate = currentDate.minusDays(7);
-			analysysList = orderRepository.getAnalysys(weekDate, currentDate);
-		}
-		else 
-		{
+			analysysList = orderRepository.getAnalysys(firstDayInWeek, currentDate);
+		} else {
+
+			LocalDate monthBegin = LocalDate.now().withDayOfMonth(1);
 			LocalDate currentDate = LocalDate.now();
-			LocalDate weekDate = currentDate.minusDays(30);
-			analysysList = orderRepository.getAnalysys(weekDate, currentDate);
+			analysysList = orderRepository.getAnalysys(monthBegin, currentDate);
 		}
 		return analysysList;
 	}

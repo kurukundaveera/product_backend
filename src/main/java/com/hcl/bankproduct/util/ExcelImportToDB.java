@@ -58,6 +58,7 @@ public class ExcelImportToDB {
 					int rating =  (int)row.getCell(4).getNumericCellValue();
 					int brokerage = (int)row.getCell(5).getNumericCellValue();
 					
+					
 					logger.info(brokerage);					
 					
 					Product product=new Product();
